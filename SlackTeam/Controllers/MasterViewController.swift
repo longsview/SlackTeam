@@ -119,6 +119,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         userCell.userRealName.text = event.realName
         userCell.userTitle.text = event.title
         userCell.userSlackName.text = event.name
+        
+        userCell.userImageView.backgroundColor = UIColor(red: CGFloat(colorR),
+                                                         green: CGFloat(colorG),
+                                                         blue: CGFloat(colorB),
+                                                         alpha: 1.0)
+        
+        // set and cache the user profile image on the cell
+        //
+        guard let icon192 = event.icon192, let imageUrl = URL(string:icon192) else { return }
+        userCell.userImageView.setImageWith(imageUrl, placeholderImage:nil)
     }
 
     // MARK: - Fetched results controller

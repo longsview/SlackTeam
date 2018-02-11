@@ -7,6 +7,7 @@ target 'SlackTeam' do
 
   # Pods for SlackTeam
   pod 'AFNetworking', '~> 3.0'
+  pod 'SDWebImage', '~> 4.3.0'
 
   target 'SlackTeamTests' do
     inherit! :search_paths
