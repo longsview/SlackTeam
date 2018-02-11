@@ -84,7 +84,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="80" id="9tE-2P-DhB" customClass="UserCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="80" id="9tE-2P-DhB" customClass="UserCell" customModule="SlackTeam" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9tE-2P-DhB" id="hZH-bP-wc5">
@@ -92,7 +92,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d2i-eb-nfq">
-                                            <rect key="frame" x="16" y="10" width="60" height="60"/>
+                                            <rect key="frame" x="16" y="13" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="UKw-lF-gHc"/>
                                                 <constraint firstAttribute="height" constant="60" id="trj-Z3-R7d"/>
@@ -137,10 +137,10 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="userImageView" destination="d2i-eb-nfq" id="xQ7-jY-NYX"/>
-                                    <outlet property="userRealName" destination="xGX-Dx-l9K" id="PvJ-42-Fwc"/>
-                                    <outlet property="userSlackName" destination="Shv-io-OXB" id="kDj-Eq-T8s"/>
-                                    <outlet property="userTitle" destination="Aqm-Ts-Jsn" id="wUd-Nd-DhL"/>
+                                    <outlet property="userImageView" destination="d2i-eb-nfq" id="fwA-L5-Rfh"/>
+                                    <outlet property="userRealName" destination="xGX-Dx-l9K" id="MXI-qd-pTW"/>
+                                    <outlet property="userSlackName" destination="Shv-io-OXB" id="wXH-g1-1hs"/>
+                                    <outlet property="userTitle" destination="Aqm-Ts-Jsn" id="m47-GB-HTc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -150,7 +150,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="members" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>

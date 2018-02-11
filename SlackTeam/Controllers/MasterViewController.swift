@@ -12,7 +12,7 @@ import CoreData
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
+    var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
     
     var searchController: UISearchController! = nil
 
@@ -36,6 +36,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
         navigationItem.hidesSearchBarWhenScrolling = true
+        
+        WebService.getUsers(managedObjectContext) { (users, error) in
+            
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -102,7 +106,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: UITableViewCell, withEvent event: User) {
-        cell.textLabel!.text = event.timestamp!.description
+        //cell.textLabel!.text = event.timestamp!.description
     }
 
     // MARK: - Fetched results controller
@@ -112,7 +116,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        let fetchRequest: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
@@ -124,7 +128,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
