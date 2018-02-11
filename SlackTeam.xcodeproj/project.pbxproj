@@ -102,13 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				B2950590202EA8B70054FF41 /* AppDelegate.swift */,
-				B2950595202EA8B70054FF41 /* MasterViewController.swift */,
-				B2950597202EA8B70054FF41 /* DetailViewController.swift */,
-				B2950599202EA8B70054FF41 /* Main.storyboard */,
-				B295059C202EA8B70054FF41 /* Assets.xcassets */,
-				B295059E202EA8B70054FF41 /* LaunchScreen.storyboard */,
-				B29505A1202EA8B70054FF41 /* Info.plist */,
-				B2950592202EA8B70054FF41 /* SlackTeam.xcdatamodeld */,
+				B29505C5202FF9130054FF41 /* Controllers */,
+				B29505C4202FF90D0054FF41 /* Models */,
+				B29505C6202FF9270054FF41 /* Resources */,
+				B29505C3202FF8F90054FF41 /* Views */,
 			);
 			path = SlackTeam;
 			sourceTree = "<group>";
@@ -129,6 +126,41 @@
 				B29505B7202EA8B80054FF41 /* Info.plist */,
 			);
 			path = SlackTeamUITests;
+			sourceTree = "<group>";
+		};
+		B29505C3202FF8F90054FF41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B29505C4202FF90D0054FF41 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B2950592202EA8B70054FF41 /* SlackTeam.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B29505C5202FF9130054FF41 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B2950595202EA8B70054FF41 /* MasterViewController.swift */,
+				B2950597202EA8B70054FF41 /* DetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B29505C6202FF9270054FF41 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B29505A1202EA8B70054FF41 /* Info.plist */,
+				B295059C202EA8B70054FF41 /* Assets.xcassets */,
+				B295059E202EA8B70054FF41 /* LaunchScreen.storyboard */,
+				B2950599202EA8B70054FF41 /* Main.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,7 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LB8A5Y93K6;
-				INFOPLIST_FILE = SlackTeam/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SlackTeam/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholaslong.SlackTeam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -451,7 +483,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LB8A5Y93K6;
-				INFOPLIST_FILE = SlackTeam/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SlackTeam/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nicholaslong.SlackTeam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
