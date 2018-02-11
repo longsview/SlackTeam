@@ -107,6 +107,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(_ cell: UITableViewCell, withEvent event: User) {
         //cell.textLabel!.text = event.timestamp!.description
+        guard let colorR = event.colorR?.floatValue,
+            let colorG = event.colorG?.floatValue,
+            let colorB = event.colorB?.floatValue else { return }
+        cell.backgroundColor = UIColor(red: CGFloat(colorR),
+                                       green: CGFloat(colorG),
+                                       blue: CGFloat(colorB),
+                                       alpha: 0.25)
+        
+        guard let userCell = cell as? UserCell else { return }
+        userCell.userRealName.text = event.realName
+        userCell.userTitle.text = event.title
+        userCell.userSlackName.text = event.name
     }
 
     // MARK: - Fetched results controller

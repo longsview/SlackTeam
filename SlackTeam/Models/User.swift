@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 public final class User: ManagedObject {
     
@@ -36,11 +37,14 @@ public final class User: ManagedObject {
         
         // initialize the color components
         //
-        //UIColor * color = [UIColor colorFromHexString:dictionary[@"color"]];
-        //const CGFloat *components = CGColorGetComponents(color.CGColor);
-        //self.colorR = [NSNumber numberWithFloat:components[0]];
-        //self.colorG = [NSNumber numberWithFloat:components[1]];
-        //self.colorB = [NSNumber numberWithFloat:components[2]];
+        if let colorString = data["color"] as? String {
+            let color = UIColor(hexString: colorString)
+            if let components = color.cgColor.components {
+                colorR = components[0] as NSNumber
+                colorG = components[1] as NSNumber
+                colorB = components[2] as NSNumber
+            }
+        }
         
         // store profile information
         //

@@ -25,6 +25,7 @@
 		B29505D6203021D00054FF41 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D5203021D00054FF41 /* User+CoreDataProperties.swift */; };
 		B29505D8203035990054FF41 /* User+ManagedObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D7203035990054FF41 /* User+ManagedObjectType.swift */; };
 		B29505DA20303F660054FF41 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D920303F660054FF41 /* UserCell.swift */; };
+		B29505DD2030454A0054FF41 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505DC2030454A0054FF41 /* UIColor+Extensions.swift */; };
 		D56B7F3B55986D1409FD8FE1 /* Pods_SlackTeam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8D0AB35E017DF821CEB6D /* Pods_SlackTeam.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		B29505D5203021D00054FF41 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B29505D7203035990054FF41 /* User+ManagedObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+ManagedObjectType.swift"; sourceTree = "<group>"; };
 		B29505D920303F660054FF41 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		B29505DC2030454A0054FF41 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		C170EAFAE3B0CD01C7CDE38F /* Pods-SlackTeamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamTests/Pods-SlackTeamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2ED8C6753656B6CF3B0EA5D /* Pods-SlackTeamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamUITests/Pods-SlackTeamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CAE6705638D67BE044674959 /* Pods-SlackTeamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamUITests/Pods-SlackTeamUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				B29505C3202FF8F90054FF41 /* Views */,
 				B29505C5202FF9130054FF41 /* Controllers */,
 				B29505C7203001BA0054FF41 /* Services */,
+				B29505DB203045310054FF41 /* Extensions */,
 				B29505C6202FF9270054FF41 /* Resources */,
 			);
 			path = SlackTeam;
@@ -230,6 +233,14 @@
 				B29505C8203001F20054FF41 /* WebService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		B29505DB203045310054FF41 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B29505DC2030454A0054FF41 /* UIColor+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -532,6 +543,7 @@
 				B29505D42030212B0054FF41 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				B2950596202EA8B70054FF41 /* MasterViewController.swift in Sources */,
 				B29505C9203001F20054FF41 /* WebService.swift in Sources */,
+				B29505DD2030454A0054FF41 /* UIColor+Extensions.swift in Sources */,
 				B2950598202EA8B70054FF41 /* DetailViewController.swift in Sources */,
 				B29505D6203021D00054FF41 /* User+CoreDataProperties.swift in Sources */,
 				B29505DA20303F660054FF41 /* UserCell.swift in Sources */,
