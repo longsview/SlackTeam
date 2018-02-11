@@ -1,0 +1,6 @@
+framework module Pods_SlackTeamTests {
+  umbrella header "Pods-SlackTeamTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
