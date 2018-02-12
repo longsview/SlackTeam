@@ -24,19 +24,21 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
         let navigationBarAppearace = UINavigationBar.appearance()
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
             navigationBarAppearace.barTintColor = UIColor(red: 71.0/255.0, green: 65.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         } else {
-            navigationBarAppearace.tintColor = UIColor.black
+            navigationBarAppearace.tintColor = UIColor.white
             navigationBarAppearace.barTintColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
         }
-        searchController.searchBar.tintColor = UIColor.black
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.barStyle = .black
+            
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
         navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIImageView(image: UIImage(named: "slack")))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sort))
         
         WebService.getUsers(managedObjectContext) { (users, error) in
             
@@ -125,7 +127,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -197,12 +199,62 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
 }
 
-extension MasterViewController: UISearchControllerDelegate {
-    
-}
-
-extension MasterViewController: UISearchBarDelegate {
-    
+extension MasterViewController {
+    @objc
+    func sort() {
+        // add an action sheet with the different types of sorting supported
+        //
+        let sheet = UIAlertController(title: NSLocalizedString("SORT BY", comment: "Sort"),
+                                      message: nil, preferredStyle: .actionSheet)
+        sheet.addAction(UIAlertAction(title: "Full Name", style: .default, handler: { [weak self] action in
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            let sortDescriptor = NSSortDescriptor(key: "realName", ascending: true)
+            self?.fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
+            do {
+                try self?.fetchedResultsController.performFetch()
+            } catch {}
+            self?.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: "Slack Name", style: .default, handler: { [weak self] action in
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            self?.fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
+            do {
+                try self?.fetchedResultsController.performFetch()
+            } catch {}
+            self?.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: "First Name", style: .default, handler: { [weak self] action in
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            let sortDescriptor = NSSortDescriptor(key: "firstName", ascending: true)
+            self?.fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
+            do {
+                try self?.fetchedResultsController.performFetch()
+            } catch {}
+            self?.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: "Last Name", style: .default, handler: { [weak self] action in
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            let sortDescriptor = NSSortDescriptor(key: "lastName", ascending: true)
+            self?.fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
+            do {
+                try self?.fetchedResultsController.performFetch()
+            } catch {}
+            self?.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: "Title", style: .default, handler: { [weak self] action in
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+            self?.fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
+            do {
+                try self?.fetchedResultsController.performFetch()
+            } catch {}
+            self?.tableView.reloadData()
+        }))
+        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        }))
+        present(sheet, animated: true)
+    }
 }
 
 extension MasterViewController: UISearchResultsUpdating {
