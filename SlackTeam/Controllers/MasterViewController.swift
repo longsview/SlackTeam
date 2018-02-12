@@ -85,24 +85,26 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func configureCell(_ cell: UITableViewCell, withEvent event: User) {
-        //cell.textLabel!.text = event.timestamp!.description
-        guard let colorR = event.colorR?.floatValue,
-            let colorG = event.colorG?.floatValue,
-            let colorB = event.colorB?.floatValue else { return }
-        cell.backgroundColor = UIColor(red: CGFloat(colorR),
-                                       green: CGFloat(colorG),
-                                       blue: CGFloat(colorB),
-                                       alpha: 0.25)
-        
         guard let userCell = cell as? UserCell else { return }
         userCell.userRealName.text = event.realName
         userCell.userTitle.text = event.title
-        userCell.userSlackName.text = event.name
         
-        userCell.userImageView.backgroundColor = UIColor(red: CGFloat(colorR),
-                                                         green: CGFloat(colorG),
-                                                         blue: CGFloat(colorB),
-                                                         alpha: 1.0)
+        if let slackName = event.name {
+            userCell.userSlackName.text = "@" + slackName
+        }
+        
+        if let colorR = event.colorR?.floatValue,
+            let colorG = event.colorG?.floatValue,
+            let colorB = event.colorB?.floatValue {
+            cell.backgroundColor = UIColor(red: CGFloat(colorR),
+                                           green: CGFloat(colorG),
+                                           blue: CGFloat(colorB),
+                                           alpha: 0.25)
+            userCell.userImageView.backgroundColor = UIColor(red: CGFloat(colorR),
+                                                             green: CGFloat(colorG),
+                                                             blue: CGFloat(colorB),
+                                                             alpha: 1.0)
+        }
         
         // set and cache the user profile image on the cell
         //
@@ -168,9 +170,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! User)
+                guard let cell = tableView.cellForRow(at: indexPath!) else { return }
+                configureCell(cell, withEvent: anObject as! User)
             case .move:
-                configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! User)
+                guard let cell = tableView.cellForRow(at: indexPath!) else { return }
+                configureCell(cell, withEvent: anObject as! User)
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }

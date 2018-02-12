@@ -21,6 +21,19 @@ class DetailViewController: UIViewController {
         
         guard let name = detail.name else { return }
         detailView.avatarSlackName?.text = "@" + name
+        detailView.avatarTitleName?.text = detail.title
+        
+        var contacts = [String:URL]()
+        if let email = detail.email, !email.isEmpty, let url = URL(string: "mailto:"+email) {
+            contacts["email"] = url
+        }
+        if let skype = detail.skype, !skype.isEmpty, let url = URL(string: "skype:"+skype+"?call") {
+            contacts["skype"] = url
+        }
+        if let phone = detail.phone, !phone.isEmpty, let url = URL(string: "tel:"+phone) {
+            contacts["phone"] = url
+        }
+        detailView.setContacts(contacts)
     }
 
     override func viewDidLoad() {

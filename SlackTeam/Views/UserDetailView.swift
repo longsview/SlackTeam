@@ -16,6 +16,7 @@ class UserDetailView: UIView {
     var avatarView: UIView?
     var avatarImageView: UIImageView?
     var avatarSlackName: UILabel?
+    var avatarTitleName: UILabel?
     
     var contactStackView: UIStackView?
     
@@ -42,6 +43,42 @@ class UserDetailView: UIView {
         }
         
         super.layoutSubviews()
+    }
+    
+    func setContacts(_ contacts: [String: URL]) {
+        guard let contactStackView = contactStackView else { return }
+        for view in contactStackView.arrangedSubviews {
+            contactStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
+        for (contact, value) in contacts {
+            let button = Button() {
+                UIApplication.shared.open(value) { success in
+                    if !success {
+                        let alert = UIAlertController(title: contact + " not supported",
+                                                    message: nil,
+                                             preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK",
+                                                                               comment: "Default action"), style: .default))
+                        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 19)
+            button.setTitleColor(.black, for: .normal)
+            button.layer.borderColor = UIColor.darkGray.cgColor
+            button.layer.borderWidth = 2
+            button.layer.cornerRadius = 7
+            button.layer.masksToBounds = true
+            button.setTitle(contact, for: .normal)
+            
+            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 120).isActive = true
+            
+            contactStackView.addArrangedSubview(button)
+        }
     }
 
     fileprivate func initializeBackgroundView() {
@@ -77,12 +114,19 @@ class UserDetailView: UIView {
         avatarImageView.layer.borderColor = UIColor.darkGray.cgColor
         avatarImageView.layer.masksToBounds = true
         avatarView.addSubview(avatarImageView)
+
+        avatarTitleName = UILabel()
+        guard let avatarTitleName = avatarTitleName else { return }
+        avatarTitleName.translatesAutoresizingMaskIntoConstraints = false
+        avatarTitleName.font = UIFont.systemFont(ofSize: 19)
+        avatarTitleName.textColor = .black
+        avatarView.addSubview(avatarTitleName)
         
         avatarSlackName = UILabel()
         guard let avatarSlackName = avatarSlackName else { return }
         avatarSlackName.translatesAutoresizingMaskIntoConstraints = false
         avatarSlackName.font = UIFont.systemFont(ofSize: 19)
-        avatarSlackName.textColor = .black
+        avatarSlackName.textColor = .darkGray
         avatarView.addSubview(avatarSlackName)
     }
 
@@ -94,7 +138,7 @@ class UserDetailView: UIView {
         contactStackView.axis = .vertical;
         contactStackView.distribution = .equalSpacing;
         contactStackView.alignment = .center;
-        contactStackView.spacing = 30;
+        contactStackView.spacing = 20;
         addSubview(contactStackView)
     }
     
@@ -163,7 +207,8 @@ class UserDetailView: UIView {
     fileprivate func initializeAvatarConstraints() {
         guard let avatarView = avatarView,
             let avatarImageView = avatarImageView,
-            let avatarSlackName = avatarSlackName else { return }
+            let avatarSlackName = avatarSlackName,
+            let avatarTitleName = avatarTitleName else { return }
         
         addConstraint(NSLayoutConstraint(item: avatarView,
                                          attribute: .centerX,
@@ -223,13 +268,35 @@ class UserDetailView: UIView {
                                          multiplier: 1.0,
                                          constant: 140))
         
-        addConstraint(NSLayoutConstraint(item: avatarSlackName,
+        addConstraint(NSLayoutConstraint(item: avatarTitleName,
                                          attribute: .top,
                                          relatedBy: .equal,
                                          toItem: avatarImageView,
                                          attribute: .bottom,
                                          multiplier: 1.0,
+                                         constant: 10))
+        addConstraint(NSLayoutConstraint(item: avatarTitleName,
+                                         attribute: .centerX,
+                                         relatedBy: .equal,
+                                         toItem: avatarView,
+                                         attribute: .centerX,
+                                         multiplier: 1.0,
+                                         constant: 0))
+        addConstraint(NSLayoutConstraint(item: avatarTitleName,
+                                         attribute: .height,
+                                         relatedBy: .equal,
+                                         toItem: nil,
+                                         attribute: .notAnAttribute,
+                                         multiplier: 1.0,
                                          constant: 20))
+        
+        addConstraint(NSLayoutConstraint(item: avatarSlackName,
+                                         attribute: .top,
+                                         relatedBy: .equal,
+                                         toItem: avatarTitleName,
+                                         attribute: .bottom,
+                                         multiplier: 1.0,
+                                         constant: 2))
         addConstraint(NSLayoutConstraint(item: avatarSlackName,
                                          attribute: .centerX,
                                          relatedBy: .equal,
@@ -243,11 +310,25 @@ class UserDetailView: UIView {
                                          toItem: nil,
                                          attribute: .notAnAttribute,
                                          multiplier: 1.0,
-                                         constant: 25))
+                                         constant: 20))
     }
 
     fileprivate func initializeContactConstraints() {
         guard let contactStackView = contactStackView else { return }
         
+        addConstraint(NSLayoutConstraint(item: contactStackView,
+                                         attribute: .top,
+                                         relatedBy: .equal,
+                                         toItem: avatarView,
+                                         attribute: .bottom,
+                                         multiplier: 1.0,
+                                         constant: 10))
+        addConstraint(NSLayoutConstraint(item: contactStackView,
+                                         attribute: .centerX,
+                                         relatedBy: .equal,
+                                         toItem: avatarView,
+                                         attribute: .centerX,
+                                         multiplier: 1.0,
+                                         constant: 0))
     }
 }
