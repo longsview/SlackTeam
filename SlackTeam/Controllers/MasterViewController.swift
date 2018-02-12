@@ -131,7 +131,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: "Master")
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                   managedObjectContext: self.managedObjectContext,
+                                                                   sectionNameKeyPath: nil,
+                                                                   cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
@@ -204,6 +207,23 @@ extension MasterViewController: UISearchBarDelegate {
 
 extension MasterViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        do {
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            guard let searchString = searchController.searchBar.text, !searchString.isEmpty else {
+                fetchedResultsController.fetchRequest.predicate = nil
+                try fetchedResultsController.performFetch()
+                tableView.reloadData()
+                return
+            }
+
+            let predicate = NSPredicate(format: "name contains[cd] %@ OR realName contains[cd] %@ OR title contains[cd] %@",
+                                        searchString, searchString, searchString)
+            fetchedResultsController.fetchRequest.predicate = predicate
+            try fetchedResultsController.performFetch()
+            tableView.reloadData()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
 }
