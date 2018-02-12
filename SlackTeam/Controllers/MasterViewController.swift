@@ -13,9 +13,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-    
     var searchController: UISearchController! = nil
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +35,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIImageView(image: UIImage(named: "slack")))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sort))
         
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: view)
+        }
         WebService.getUsers(managedObjectContext) { (users, error) in
             
         }
@@ -278,5 +280,25 @@ extension MasterViewController: UISearchResultsUpdating {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+}
+
+extension MasterViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView?.indexPathForRow(at: location) else { return nil }
+        guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return nil }
+
+        let detail = fetchedResultsController.object(at: indexPath)
+        detailVC.detailItem = detail
+
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 600)
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        showDetailViewController(viewControllerToCommit, sender: self)
     }
 }

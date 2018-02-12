@@ -207,7 +207,6 @@
 			children = (
 				B2950592202EA8B70054FF41 /* SlackTeam.xcdatamodeld */,
 				B29505D120301D4E0054FF41 /* ManagedObject.swift */,
-				B29505D32030212B0054FF41 /* NSManagedObjectContext+Extensions.swift */,
 				B29505CB203013930054FF41 /* User.swift */,
 				B29505D5203021D00054FF41 /* User+CoreDataProperties.swift */,
 				B29505D7203035990054FF41 /* User+ManagedObjectType.swift */,
@@ -247,6 +246,7 @@
 		B29505DB203045310054FF41 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B29505D32030212B0054FF41 /* NSManagedObjectContext+Extensions.swift */,
 				B29505DC2030454A0054FF41 /* UIColor+Extensions.swift */,
 			);
 			path = Extensions;
