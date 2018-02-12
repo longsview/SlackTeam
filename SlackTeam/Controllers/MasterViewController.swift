@@ -30,9 +30,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if (UI_USER_INTERFACE_IDIOM() == .pad) {
             navigationBarAppearace.barTintColor = UIColor(red: 71.0/255.0, green: 65.0/255.0, blue: 90.0/255.0, alpha: 1.0)
         } else {
+            navigationBarAppearace.tintColor = UIColor.black
             navigationBarAppearace.barTintColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
         }
-        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.tintColor = UIColor.black
         definesPresentationContext = true
         navigationItem.searchController = self.searchController
         navigationItem.hidesSearchBarWhenScrolling = true
@@ -67,7 +68,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     // MARK: - Table View
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return fetchedResultsController.sections?.count ?? 0
     }
@@ -82,27 +82,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let event = fetchedResultsController.object(at: indexPath)
         configureCell(cell, withEvent: event)
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let context = fetchedResultsController.managedObjectContext
-            context.delete(fetchedResultsController.object(at: indexPath))
-                
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 
     func configureCell(_ cell: UITableViewCell, withEvent event: User) {

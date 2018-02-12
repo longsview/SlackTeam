@@ -9,8 +9,4 @@
 import CoreData
 
 extension User: ManagedObjectType {
-    
-    public static var entityName: String {
-        return "User"
-    }
 }
