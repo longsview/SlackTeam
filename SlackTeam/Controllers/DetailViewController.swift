@@ -13,6 +13,7 @@ class DetailViewController: UIViewController {
     func configureView() {
         // Update the user interface for the detail item.
         guard let detail = detailItem, let detailView = view as? UserDetailView else { return }
+        detailView.avatarView?.isHidden = false
         title = detailItem?.realName
         
         guard let icon192 = detail.icon192, let imageUrl = URL(string:icon192) else { return }

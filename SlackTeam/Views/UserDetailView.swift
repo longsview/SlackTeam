@@ -88,6 +88,7 @@ class UserDetailView: UIView {
             backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
             backgroundImageView.contentMode = .scaleAspectFill
             backgroundImageView.alpha = 0.75
+            backgroundImageView.backgroundColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
             addSubview(backgroundImageView)
         
             backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
@@ -102,6 +103,7 @@ class UserDetailView: UIView {
         guard let avatarView = avatarView else { return }
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.backgroundColor = .clear
+        avatarView.isHidden = true
         addSubview(avatarView)
         
         avatarImageView = UIImageView()

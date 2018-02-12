@@ -25,12 +25,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         let navigationBarAppearace = UINavigationBar.appearance()
-        if (UI_USER_INTERFACE_IDIOM() == .pad) {
-            navigationBarAppearace.barTintColor = UIColor(red: 71.0/255.0, green: 65.0/255.0, blue: 90.0/255.0, alpha: 1.0)
-        } else {
-            navigationBarAppearace.tintColor = UIColor.white
-            navigationBarAppearace.barTintColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
-        }
+        navigationBarAppearace.tintColor = UIColor.white
+        navigationBarAppearace.barTintColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
         searchController.searchBar.tintColor = .white
         searchController.searchBar.barStyle = .black
             
@@ -63,8 +59,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let object = fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                //controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
+                //controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
@@ -253,6 +249,11 @@ extension MasterViewController {
         }))
         sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
         }))
+        
+        if let popoverPresentationController = sheet.popoverPresentationController {
+            popoverPresentationController.sourceView = view
+            popoverPresentationController.barButtonItem = navigationItem.rightBarButtonItem
+        }
         present(sheet, animated: true)
     }
 }
