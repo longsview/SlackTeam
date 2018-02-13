@@ -8,6 +8,10 @@
 
 import UIKit
 
+// This button class allows a touch handler
+// at init allowing inline handling of the
+// button being tapped
+//
 class Button: UIButton {
     
     fileprivate var handler: (() -> Void)?

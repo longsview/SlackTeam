@@ -35,10 +35,4 @@ extension NSManagedObjectContext {
             return false
         }
     }
-    
-    public func performRefreshAllObjects() {
-        perform { [weak self] in
-            self?.refreshAllObjects()
-        }
-    }
 }

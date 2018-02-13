@@ -36,6 +36,9 @@ class UserDetailView: UIView {
     var constraintsInitialized = false
     override func layoutSubviews() {
         if !constraintsInitialized {
+            // first time through initialize
+            // all the view constraints
+            //
             initializeBackgroundConstraints()
             initializeAvatarConstraints()
             initializeContactConstraints()
@@ -47,18 +50,24 @@ class UserDetailView: UIView {
     
     func setContacts(_ contacts: [String: URL]) {
         guard let contactStackView = contactStackView else { return }
+        
+        // remove existing contact buttons in stack
+        //
         for view in contactStackView.arrangedSubviews {
             contactStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
         
+        // create a button for each contact type
+        // that will open the assocaited uri
+        //
         for (contact, value) in contacts {
             let button = Button() {
                 UIApplication.shared.open(value) { success in
                     if !success {
                         let alert = UIAlertController(title: contact + " not supported",
-                                                    message: nil,
-                                             preferredStyle: .alert)
+                                                      message: nil,
+                                                      preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: NSLocalizedString("OK",
                                                                                comment: "Default action"), style: .default))
                         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
@@ -88,7 +97,7 @@ class UserDetailView: UIView {
             backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
             backgroundImageView.contentMode = .scaleAspectFill
             backgroundImageView.alpha = 0.75
-            backgroundImageView.backgroundColor = UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+            backgroundImageView.backgroundColor = UIColor.slackPurp()
             addSubview(backgroundImageView)
         
             backgroundBlurView = UIVisualEffectView(effect: UIBlurEffect(style: .light))

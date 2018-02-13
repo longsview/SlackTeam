@@ -22,36 +22,37 @@ extension ManagedObjectType {
     }
 }
 
+// This is the base class for all new
+// Core Data managed object types. Make
+// sure you subclass from this class.
+//
 extension ManagedObjectType where Self: ManagedObject {
 
+    // returns just the entity name of the managed object type
+    //
     public static var entityName: String {
         return NSStringFromClass(Self.self).components(separatedBy: ".").last ?? ""
     }
     
-    public static func insertNewObject(inContext moc: NSManagedObjectContext,
-                                       configure: (Self) -> ()) -> Self? {
-        if let newObject: Self = moc.insertObject() {
-            configure(newObject)
-            return newObject
-        }
-        return nil
-    }
-    
+    // Finds object matching the given predicate
+    // and creates a new object if it does not exist
+    //
     public static func findOrCreate(inContext moc: NSManagedObjectContext,
-                                    matchingPredicate predicate: NSPredicate,
-                                    configureNewObject: (Self) -> ()) -> Self? {
+                                    matchingPredicate predicate: NSPredicate) -> Self? {
         if let obj = findOrFetch(inContext: moc,
                                  matchingPredicate: predicate) {
             return obj
         }
         
         if let newObject: Self = moc.insertObject() {
-            configureNewObject(newObject)
             return newObject
         }
         return nil
     }
     
+    // Finds object matching the given predicate
+    // and returns a nil object if it can't find it
+    //
     public static func findOrFetch(inContext moc: NSManagedObjectContext,
                                    matchingPredicate predicate: NSPredicate) -> Self? {
         if let obj = materializedObject(inContext: moc,
@@ -65,6 +66,9 @@ extension ManagedObjectType where Self: ManagedObject {
             request.fetchLimit = 2
         }
         
+        // there should only be one instance
+        // of these objects matching the given predicate
+        //
         switch result.count {
         case 0: return nil
         case 1: return result.first

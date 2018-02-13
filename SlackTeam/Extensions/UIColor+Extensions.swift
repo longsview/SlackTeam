@@ -32,4 +32,8 @@ extension UIColor {
         
         self.init(red:red, green:green, blue:blue, alpha:1)
     }
+
+    static func slackPurp(_ alpha: CGFloat = 1.0) -> UIColor {
+        return UIColor(red: 97.0/255.0, green: 92.0/255.0, blue: 110.0/255.0, alpha: alpha)
+    }
 }

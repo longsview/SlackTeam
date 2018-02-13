@@ -18,10 +18,7 @@ public final class User: ManagedObject {
 
         let predicate = NSPredicate(format: "userID = %@", userId)
         guard let user = User.findOrCreate(inContext: moc,
-                                   matchingPredicate: predicate,
-                                  configureNewObject: { user in
-                                    
-        }) else { return nil }
+                                           matchingPredicate: predicate) else { return nil }
         
         if let data = data {
             user.loadFromData(data)
