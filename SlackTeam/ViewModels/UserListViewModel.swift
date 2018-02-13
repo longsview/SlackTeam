@@ -13,6 +13,11 @@ class UserListViewModel: UserListViewModelProtocol {
 
     var managedObjectContext = CoreDataContextCoordinator.shared.mainQueueContext
     fileprivate weak var viewDelegate: UserListViewDelegate?
+    static let cacheName = "Master"
+    
+    var webService: WebService {
+        return WebService.shared
+    }
     
     var filterString: String? = nil {
         didSet {
@@ -23,7 +28,7 @@ class UserListViewModel: UserListViewModelProtocol {
                 predicate = NSPredicate(format: "name contains[cd] %@ OR realName contains[cd] %@ OR title contains[cd] %@",
                                         filterString, filterString, filterString)
             }
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: UserListViewModel.cacheName)
             fetchedResultsController.fetchRequest.predicate = predicate
             do {
                 try fetchedResultsController.performFetch()
@@ -35,7 +40,7 @@ class UserListViewModel: UserListViewModelProtocol {
         didSet {
             // delete cache before updating sort descriptor
             //
-            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+            NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: UserListViewModel.cacheName)
             let sortDescriptor = NSSortDescriptor(key: sortString, ascending: true)
             fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor]
             do {
@@ -53,14 +58,13 @@ class UserListViewModel: UserListViewModelProtocol {
         return fetchedResultsController.object(at: IndexPath(row: index, section: 0))
     }
     
-    
     init(view: UserListViewDelegate) {
         viewDelegate = view
         fetchedResultsController.delegate = view
 
         // Hit the API to refresh the list of users
         //
-        WebService.getUsers() { [weak self] (users, error) in
+        webService.getUsers() { [weak self] (users, error) in
             self?.viewDelegate?.loaded()
         }
     }
@@ -73,7 +77,7 @@ class UserListViewModel: UserListViewModelProtocol {
         
         // Fetch request is sorted by name first time through
         //
-        NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Master")
+        NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: UserListViewModel.cacheName)
         let fetchRequest: NSFetchRequest<User> = NSFetchRequest(entityName: "User")
         fetchRequest.fetchBatchSize = 20
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -81,7 +85,7 @@ class UserListViewModel: UserListViewModelProtocol {
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                    managedObjectContext: managedObjectContext,
                                                                    sectionNameKeyPath: nil,
-                                                                   cacheName: "Master")
+                                                                   cacheName: UserListViewModel.cacheName)
         _fetchedResultsController = aFetchedResultsController
         
         do {

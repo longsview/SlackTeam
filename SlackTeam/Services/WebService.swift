@@ -12,13 +12,20 @@ import AFNetworking
 
 class WebService {
     
+    static var shared = WebService()
+    
     static let token = "xoxp-4698769766-4698769768-266771053075-66c3498cd17d3c736b94fdd14307ef20"
-
-    static func getUsers(completion: @escaping ([User], Error?) -> Void) {
-        let manager = AFHTTPSessionManager()
+    static let baseUrl = "https://slack.com/api/"
+    fileprivate let manager = AFHTTPSessionManager()
+    
+    init() {
         manager.responseSerializer = AFJSONResponseSerializer()
-        manager.get("https://slack.com/api/users.list",
-            parameters: ["token": token],
+    }
+
+    func getUsers(completion: @escaping ([User], Error?) -> Void) {
+        
+        manager.get(WebService.baseUrl+"users.list",
+            parameters: ["token": WebService.token],
             progress: nil,
             success: { (operation, responseObject) in
                 let moc = CoreDataContextCoordinator.shared.backgroundContext

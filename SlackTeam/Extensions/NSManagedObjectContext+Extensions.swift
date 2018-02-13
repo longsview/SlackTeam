@@ -12,7 +12,7 @@ extension NSManagedObjectContext {
 
     public func insertObject<A: ManagedObject>() -> A? where A: ManagedObjectType {
         guard let obj = NSEntityDescription.insertNewObject(forEntityName: A.entityName, into: self) as? A else {
-            assertionFailure("Wrong object type")
+            assertionFailure("Incorrect type")
             return nil
         }
         return obj
@@ -30,7 +30,7 @@ extension NSManagedObjectContext {
             }
             return true
         } catch let error as NSError {
-            debugPrint("MOC save failed : \(error), \(error.userInfo)")
+            debugPrint("save failed : \(error), \(error.userInfo)")
             rollback()
             return false
         }

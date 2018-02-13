@@ -1,4 +1,4 @@
-    //
+//
 //  AppDelegate.swift
 //  SlackTeam
 //
@@ -49,4 +49,3 @@ extension AppDelegate: UISplitViewControllerDelegate {
         return false
     }
 }
-

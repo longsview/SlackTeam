@@ -16,7 +16,7 @@
 		B295059B202EA8B70054FF41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2950599202EA8B70054FF41 /* Main.storyboard */; };
 		B295059D202EA8B70054FF41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B295059C202EA8B70054FF41 /* Assets.xcassets */; };
 		B29505A0202EA8B70054FF41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B295059E202EA8B70054FF41 /* LaunchScreen.storyboard */; };
-		B29505AB202EA8B80054FF41 /* SlackTeamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505AA202EA8B80054FF41 /* SlackTeamTests.swift */; };
+		B29505AB202EA8B80054FF41 /* UserListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505AA202EA8B80054FF41 /* UserListViewModelTests.swift */; };
 		B29505B6202EA8B80054FF41 /* SlackTeamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505B5202EA8B80054FF41 /* SlackTeamUITests.swift */; };
 		B29505C9203001F20054FF41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505C8203001F20054FF41 /* WebService.swift */; };
 		B29505CC203013930054FF41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505CB203013930054FF41 /* User.swift */; };
@@ -31,6 +31,21 @@
 		B29505E4203242B60054FF41 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505E3203242B50054FF41 /* SplitViewController.swift */; };
 		B29505EA203250C70054FF41 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505E9203250C70054FF41 /* UserListViewModel.swift */; };
 		B29505EE20325E350054FF41 /* CoreDataContextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505ED20325E350054FF41 /* CoreDataContextCoordinator.swift */; };
+		B29505EF203297100054FF41 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505E9203250C70054FF41 /* UserListViewModel.swift */; };
+		B29505F02032971A0054FF41 /* CoreDataContextCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505ED20325E350054FF41 /* CoreDataContextCoordinator.swift */; };
+		B29505F1203297310054FF41 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2950595202EA8B70054FF41 /* UserListViewController.swift */; };
+		B29505F2203297520054FF41 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505CB203013930054FF41 /* User.swift */; };
+		B29505F3203297550054FF41 /* ManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D120301D4E0054FF41 /* ManagedObject.swift */; };
+		B29505F4203297580054FF41 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D5203021D00054FF41 /* User+CoreDataProperties.swift */; };
+		B29505F52032975A0054FF41 /* User+ManagedObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D7203035990054FF41 /* User+ManagedObjectType.swift */; };
+		B29505F6203297700054FF41 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505DC2030454A0054FF41 /* UIColor+Extensions.swift */; };
+		B29505F7203297820054FF41 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D920303F660054FF41 /* UserCell.swift */; };
+		B29505F8203297850054FF41 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505DE2031345E0054FF41 /* UserDetailView.swift */; };
+		B29505F9203297980054FF41 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2950597202EA8B70054FF41 /* UserViewController.swift */; };
+		B29505FA203297AE0054FF41 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505E020316FB60054FF41 /* Button.swift */; };
+		B29505FB203297B10054FF41 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505D32030212B0054FF41 /* NSManagedObjectContext+Extensions.swift */; };
+		B29505FC203297BE0054FF41 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505C8203001F20054FF41 /* WebService.swift */; };
+		B29505FE2032AE3B0054FF41 /* UIColorExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29505FD2032AE3B0054FF41 /* UIColorExtensionsTests.swift */; };
 		D56B7F3B55986D1409FD8FE1 /* Pods_SlackTeam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8D0AB35E017DF821CEB6D /* Pods_SlackTeam.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +82,7 @@
 		B295059F202EA8B70054FF41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B29505A1202EA8B70054FF41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29505A6202EA8B80054FF41 /* SlackTeamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackTeamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B29505AA202EA8B80054FF41 /* SlackTeamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackTeamTests.swift; sourceTree = "<group>"; };
+		B29505AA202EA8B80054FF41 /* UserListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModelTests.swift; sourceTree = "<group>"; };
 		B29505AC202EA8B80054FF41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B29505B1202EA8B80054FF41 /* SlackTeamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackTeamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29505B5202EA8B80054FF41 /* SlackTeamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackTeamUITests.swift; sourceTree = "<group>"; };
@@ -85,6 +100,7 @@
 		B29505E3203242B50054FF41 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		B29505E9203250C70054FF41 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		B29505ED20325E350054FF41 /* CoreDataContextCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContextCoordinator.swift; sourceTree = "<group>"; };
+		B29505FD2032AE3B0054FF41 /* UIColorExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionsTests.swift; sourceTree = "<group>"; };
 		C170EAFAE3B0CD01C7CDE38F /* Pods-SlackTeamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamTests/Pods-SlackTeamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2ED8C6753656B6CF3B0EA5D /* Pods-SlackTeamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamUITests/Pods-SlackTeamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CAE6705638D67BE044674959 /* Pods-SlackTeamUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeamUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeamUITests/Pods-SlackTeamUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,7 +198,8 @@
 		B29505A9202EA8B80054FF41 /* SlackTeamTests */ = {
 			isa = PBXGroup;
 			children = (
-				B29505AA202EA8B80054FF41 /* SlackTeamTests.swift */,
+				B29505FD2032AE3B0054FF41 /* UIColorExtensionsTests.swift */,
+				B29505AA202EA8B80054FF41 /* UserListViewModelTests.swift */,
 				B29505AC202EA8B80054FF41 /* Info.plist */,
 			);
 			path = SlackTeamTests;
@@ -585,7 +602,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B29505AB202EA8B80054FF41 /* SlackTeamTests.swift in Sources */,
+				B29505AB202EA8B80054FF41 /* UserListViewModelTests.swift in Sources */,
+				B29505FB203297B10054FF41 /* NSManagedObjectContext+Extensions.swift in Sources */,
+				B29505F9203297980054FF41 /* UserViewController.swift in Sources */,
+				B29505FC203297BE0054FF41 /* WebService.swift in Sources */,
+				B29505F1203297310054FF41 /* UserListViewController.swift in Sources */,
+				B29505F3203297550054FF41 /* ManagedObject.swift in Sources */,
+				B29505F4203297580054FF41 /* User+CoreDataProperties.swift in Sources */,
+				B29505FE2032AE3B0054FF41 /* UIColorExtensionsTests.swift in Sources */,
+				B29505EF203297100054FF41 /* UserListViewModel.swift in Sources */,
+				B29505F2203297520054FF41 /* User.swift in Sources */,
+				B29505F02032971A0054FF41 /* CoreDataContextCoordinator.swift in Sources */,
+				B29505F6203297700054FF41 /* UIColor+Extensions.swift in Sources */,
+				B29505F7203297820054FF41 /* UserCell.swift in Sources */,
+				B29505F52032975A0054FF41 /* User+ManagedObjectType.swift in Sources */,
+				B29505FA203297AE0054FF41 /* Button.swift in Sources */,
+				B29505F8203297850054FF41 /* UserDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
