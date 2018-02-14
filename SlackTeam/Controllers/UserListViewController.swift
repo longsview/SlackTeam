@@ -15,6 +15,7 @@ protocol UserListViewModelProtocol {
     var userCount: Int { get }
     
     func userAtIndex(_ index: Int) -> User?
+    func reload()
 }
 
 protocol UserListViewDelegate: NSFetchedResultsControllerDelegate {
@@ -25,7 +26,8 @@ class UserListViewController: UITableViewController, UserListViewDelegate {
 
     var searchController: UISearchController! = nil
     var viewModel: UserListViewModelProtocol?
-    
+    var connectionErrorView: UIView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,16 +47,64 @@ class UserListViewController: UITableViewController, UserListViewDelegate {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: UIImageView(image: UIImage(named: "slack")))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sort))
         
+        initializeConnectionErrorView()
+        
         // registers peek and pop if available
         //
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: view)
         }
+        
+        // listen for connection changes in order to
+        // notify the user
+        //
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(connectionEstablished),
+                                               name: ConnectionChanged.connected.notificationName(),
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(disconnected),
+                                               name: ConnectionChanged.disconnected.notificationName(),
+                                               object: nil)
+    }
+
+    deinit {
+        NotificationCenter.removeObserver(self, forKeyPath: ConnectionChanged.connected.rawValue)
+        NotificationCenter.removeObserver(self, forKeyPath: ConnectionChanged.disconnected.rawValue)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+        
+        // check if we need to push down the no connection view
+        //
+        if !ConnectionManager.shared.hasConnection {
+            toggleNoConnectionView(true)
+        }
+        
         super.viewWillAppear(animated)
+    }
+
+    func initializeConnectionErrorView() {
+        connectionErrorView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 30))
+        guard let connectionErrorView = connectionErrorView else { return }
+        connectionErrorView.translatesAutoresizingMaskIntoConstraints = false
+        connectionErrorView.backgroundColor = .red
+        connectionErrorView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        let noConnectionLabel = UILabel()
+        connectionErrorView.addSubview(noConnectionLabel)
+        noConnectionLabel.translatesAutoresizingMaskIntoConstraints = false
+        noConnectionLabel.textColor = .white
+        noConnectionLabel.text = "No Connection"
+        noConnectionLabel.textAlignment = .center
+        noConnectionLabel.bounds = connectionErrorView.bounds
+
+        noConnectionLabel.centerXAnchor.constraint(equalTo: connectionErrorView.centerXAnchor).isActive = true
+        noConnectionLabel.widthAnchor.constraint(equalTo: connectionErrorView.widthAnchor).isActive = true
+        noConnectionLabel.heightAnchor.constraint(equalTo: connectionErrorView.heightAnchor).isActive = true
+        noConnectionLabel.topAnchor.constraint(equalTo: connectionErrorView.topAnchor).isActive = true
     }
 
     // MARK: - Segues
@@ -112,6 +162,29 @@ class UserListViewController: UITableViewController, UserListViewDelegate {
 
     func loaded() {
         // remove any loading state here
+    }
+
+    func toggleNoConnectionView(_ state: Bool) {
+        UIView.animate(withDuration: 0.25) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.tableView.tableHeaderView = state ? self?.connectionErrorView : nil
+            if state {
+                strongSelf.connectionErrorView?.widthAnchor.constraint(equalTo: strongSelf.tableView.widthAnchor).isActive = true
+            }
+        }
+    }
+    
+    @objc
+    func connectionEstablished() {
+        toggleNoConnectionView(false)
+        // if we have reconnected reload the data
+        //
+        viewModel?.reload()
+    }
+
+    @objc
+    func disconnected() {
+        toggleNoConnectionView(true)
     }
 }
 

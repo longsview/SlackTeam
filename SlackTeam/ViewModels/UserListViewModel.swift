@@ -62,6 +62,10 @@ class UserListViewModel: UserListViewModelProtocol {
         viewDelegate = view
         fetchedResultsController.delegate = view
 
+        reload()
+    }
+
+    func reload() {
         // Hit the API to refresh the list of users
         //
         webService.getUsers() { [weak self] (users, error) in

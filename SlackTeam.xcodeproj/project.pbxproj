@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		486FB4910822C2593752D905 /* Pods_SlackTeamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB2D78F48A78A5F2ABF81BBF /* Pods_SlackTeamUITests.framework */; };
 		9DE9AAD9295FCB2DA75D3E48 /* Pods_SlackTeamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A9E39C3747428ED35718311 /* Pods_SlackTeamTests.framework */; };
+		B22A515D2033BAA8008D1C15 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22A515C2033BAA8008D1C15 /* ConnectionManager.swift */; };
 		B2950591202EA8B70054FF41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2950590202EA8B70054FF41 /* AppDelegate.swift */; };
 		B2950594202EA8B70054FF41 /* SlackTeam.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B2950592202EA8B70054FF41 /* SlackTeam.xcdatamodeld */; };
 		B2950596202EA8B70054FF41 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2950595202EA8B70054FF41 /* UserListViewController.swift */; };
@@ -72,6 +73,7 @@
 		9A9E39C3747428ED35718311 /* Pods_SlackTeamTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlackTeamTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF9CA37C22C6488A423E73D /* Pods-SlackTeam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlackTeam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlackTeam/Pods-SlackTeam.debug.xcconfig"; sourceTree = "<group>"; };
 		AB2D78F48A78A5F2ABF81BBF /* Pods_SlackTeamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlackTeamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B22A515C2033BAA8008D1C15 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		B295058D202EA8B70054FF41 /* SlackTeam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlackTeam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2950590202EA8B70054FF41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2950593202EA8B70054FF41 /* SlackTeam.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SlackTeam.xcdatamodel; sourceTree = "<group>"; };
@@ -260,8 +262,9 @@
 		B29505C7203001BA0054FF41 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B29505C8203001F20054FF41 /* WebService.swift */,
+				B22A515C2033BAA8008D1C15 /* ConnectionManager.swift */,
 				B29505ED20325E350054FF41 /* CoreDataContextCoordinator.swift */,
+				B29505C8203001F20054FF41 /* WebService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				B29505EA203250C70054FF41 /* UserListViewModel.swift in Sources */,
 				B29505C9203001F20054FF41 /* WebService.swift in Sources */,
 				B29505DD2030454A0054FF41 /* UIColor+Extensions.swift in Sources */,
+				B22A515D2033BAA8008D1C15 /* ConnectionManager.swift in Sources */,
 				B2950598202EA8B70054FF41 /* UserViewController.swift in Sources */,
 				B29505D6203021D00054FF41 /* User+CoreDataProperties.swift in Sources */,
 				B29505DA20303F660054FF41 /* UserCell.swift in Sources */,
